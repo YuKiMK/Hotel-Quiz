@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ホテル勉強クイズ</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-1" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-hotel"></i> ホテル勉強クイズ</h1>
+            <nav>
+                <button id="home-btn" class="nav-btn active">ホーム</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- ホームセクション -->
+            <section id="home-section" class="quiz-section active">
+                <h2>ホテル勉強クイズへようこそ！</h2>
+                <p>以下のクイズを選択してください。</p>
+                <div class="quiz-selection">
+                    <button id="japan-hotels-btn" class="quiz-btn">日本のホテルクイズ</button>
+                    <button id="world-hotels-btn" class="quiz-btn">世界のホテルクイズ</button>
+                    <button id="management-terms-btn" class="quiz-btn">ホテル経営用語クイズ</button>
+                    <button id="business-terms-btn" class="quiz-btn">ビジネス用語クイズ</button>
+                    <button id="business-english-terms-btn" class="quiz-btn">ビジネス英語用語クイズ</button>
+                </div>
+            </section>
+
+            <!-- 日本のホテルクイズセクション -->
+            <section id="japan-hotels-section" class="quiz-section">
+                <h2>日本の有名なホテルクイズ</h2>
+                <div class="progress-bar">
+                    <div class="progress" id="japan-hotels-progress"></div>
+                </div>
+                <div id="japan-hotels-quiz" class="quiz-card"></div>
+                <div id="japan-hotels-timer" class="timer"></div>
+                <button id="japan-hotels-next" class="next-btn">次の質問</button>
+                <div id="japan-hotels-result" class="result"></div>
+            </section>
+
+            <!-- 世界のホテルクイズセクション -->
+            <section id="world-hotels-section" class="quiz-section">
+                <h2>世界の有名なホテルクイズ</h2>
+                <div class="progress-bar">
+                    <div class="progress" id="world-hotels-progress"></div>
+                </div>
+                <div id="world-hotels-quiz" class="quiz-card"></div>
+                <div id="world-hotels-timer" class="timer"></div>
+                <button id="world-hotels-next" class="next-btn">次の質問</button>
+                <div id="world-hotels-result" class="result"></div>
+            </section>
+
+            <!-- ホテル経営用語クイズセクション -->
+            <section id="management-terms-section" class="quiz-section">
+                <h2>ホテル経営用語クイズ</h2>
+                <div class="progress-bar">
+                    <div class="progress" id="management-terms-progress"></div>
+                </div>
+                <div id="management-terms-quiz" class="quiz-card"></div>
+                <div id="management-terms-timer" class="timer"></div>
+                <button id="management-terms-next" class="next-btn">次の質問</button>
+                <div id="management-terms-result" class="result"></div>
+            </section>
+
+            <!-- ビジネス用語クイズセクション -->
+            <section id="business-terms-section" class="quiz-section">
+                <h2>ビジネス用語クイズ</h2>
+                <div class="progress-bar">
+                    <div class="progress" id="business-terms-progress"></div>
+                </div>
+                <div id="business-terms-quiz" class="quiz-card"></div>
+                <div id="business-terms-timer" class="timer"></div>
+                <button id="business-terms-next" class="next-btn">次の質問</button>
+                <div id="business-terms-result" class="result"></div>
+            </section>
+
+            <!-- ビジネス英語用語クイズセクション -->
+            <section id="business-english-terms-section" class="quiz-section">
+                <h2>ビジネス英語用語クイズ</h2>
+                <div class="progress-bar">
+                    <div class="progress" id="business-english-terms-progress"></div>
+                </div>
+                <div id="business-english-terms-quiz" class="quiz-card"></div>
+                <div id="business-english-terms-timer" class="timer"></div>
+                <button id="business-english-terms-next" class="next-btn">次の質問</button>
+                <div id="business-english-terms-result" class="result"></div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 ホテル勉強クイズ</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+<!-- クイズデータの読み込み -->
+<script src="quizData/japanHotels.js"></script>
+<script src="quizData/worldHotels.js"></script>
+<script src="quizData/managementTerms.js"></script>
+<script src="quizData/businessTerms.js"></script>
+<script src="quizData/businessEnglishTerms.js"></script>
+<!-- メインのスクリプト -->
+<script src="script.js"></script>
+
+</body>
+</html>
