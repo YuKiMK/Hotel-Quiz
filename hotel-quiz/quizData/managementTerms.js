@@ -164,7 +164,7 @@ const managementTerms = [
         options: ["設備投資", "運営コスト", "収益予測", "マーケティング費用"],
         answer: "設備投資",
         details: "CAPEXは、長期的な利益を生み出すための設備や施設への投資を指します。"
-    }
+    },
     {
         question: "GOPPAR（Gross Operating Profit Per Available Room）の計算式はどれですか？",
         options: ["GOP ÷ 総客室数", "GOP × 客室稼働率", "総収益 ÷ 販売客室数", "ADR × RevPAR"],
