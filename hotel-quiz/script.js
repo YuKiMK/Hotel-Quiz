@@ -4,24 +4,33 @@ let currentWorldHotelIndex = 0;
 let currentManagementTermIndex = 0;
 let currentBusinessTermIndex = 0;
 let currentBusinessEnglishTermIndex = 0;
+let currentAdvancedBookkeepingIndex = 0;
+
 
 let japanHotelScore = 0;
 let worldHotelScore = 0;
 let managementTermScore = 0;
 let businessTermScore = 0;
 let businessEnglishTermScore = 0;
+let advancedBookkeepingScore = 0;
+
 
 let japanHotelQuestions = [];
 let worldHotelQuestions = [];
 let managementTermQuestions = [];
 let businessTermQuestions = [];
 let businessEnglishTermQuestions = [];
+let advancedBookkeepingQuestionsData = [];
+
 
 let japanHotelUserAnswers = [];
 let worldHotelUserAnswers = [];
 let managementTermUserAnswers = [];
 let businessTermUserAnswers = [];
 let businessEnglishTermUserAnswers = [];
+let advancedBookkeepingUserAnswers = [];
+
+
 
 // タイマー関連
 const timeLimit = 30; // 各質問の制限時間（秒）
@@ -34,6 +43,7 @@ const worldHotelsBtn = document.getElementById('world-hotels-btn');
 const managementTermsBtn = document.getElementById('management-terms-btn');
 const businessTermsBtn = document.getElementById('business-terms-btn');
 const businessEnglishTermsBtn = document.getElementById('business-english-terms-btn');
+const advancedBookkeepingBtn = document.getElementById('advanced-bookkeeping-btn');
 
 const homeSection = document.getElementById('home-section');
 const japanHotelsSection = document.getElementById('japan-hotels-section');
@@ -41,38 +51,42 @@ const worldHotelsSection = document.getElementById('world-hotels-section');
 const managementTermsSection = document.getElementById('management-terms-section');
 const businessTermsSection = document.getElementById('business-terms-section');
 const businessEnglishTermsSection = document.getElementById('business-english-terms-section');
+const advancedBookkeepingSection = document.getElementById('advanced-bookkeeping-section');
 
 const japanHotelsQuiz = document.getElementById('japan-hotels-quiz');
 const worldHotelsQuiz = document.getElementById('world-hotels-quiz');
 const managementTermsQuiz = document.getElementById('management-terms-quiz');
 const businessTermsQuiz = document.getElementById('business-terms-quiz');
 const businessEnglishTermsQuiz = document.getElementById('business-english-terms-quiz');
+const advancedBookkeepingQuiz = document.getElementById('advanced-bookkeeping-quiz');
 
 const japanHotelsNext = document.getElementById('japan-hotels-next');
 const worldHotelsNext = document.getElementById('world-hotels-next');
 const managementTermsNext = document.getElementById('management-terms-next');
 const businessTermsNext = document.getElementById('business-terms-next');
 const businessEnglishTermsNext = document.getElementById('business-english-terms-next');
+const advancedBookkeepingNext = document.getElementById('advanced-bookkeeping-next');
 
 const japanHotelsResult = document.getElementById('japan-hotels-result');
 const worldHotelsResult = document.getElementById('world-hotels-result');
 const managementTermsResult = document.getElementById('management-terms-result');
 const businessTermsResult = document.getElementById('business-terms-result');
 const businessEnglishTermsResult = document.getElementById('business-english-terms-result');
+const advancedBookkeepingResult = document.getElementById('advanced-bookkeeping-result');
 
 const japanHotelsProgress = document.getElementById('japan-hotels-progress');
 const worldHotelsProgress = document.getElementById('world-hotels-progress');
 const managementTermsProgress = document.getElementById('management-terms-progress');
 const businessTermsProgress = document.getElementById('business-terms-progress');
 const businessEnglishTermsProgress = document.getElementById('business-english-terms-progress');
+const advancedBookkeepingProgress = document.getElementById('advanced-bookkeeping-progress');
 
 const japanHotelsTimer = document.getElementById('japan-hotels-timer');
 const worldHotelsTimer = document.getElementById('world-hotels-timer');
 const managementTermsTimer = document.getElementById('management-terms-timer');
 const businessTermsTimer = document.getElementById('business-terms-timer');
 const businessEnglishTermsTimer = document.getElementById('business-english-terms-timer');
-
-// DOM要素の取得（続き）
+const advancedBookkeepingTimer = document.getElementById('advanced-bookkeeping-timer');
 
 // クイズ選択ボタンの取得
 const quizSelectionButtons = document.querySelectorAll('.quiz-btn');
@@ -91,7 +105,10 @@ quizSelectionButtons.forEach(button => {
             setActiveNav('business-terms');
         } else if (quizId === 'business-english-terms-btn') {
             setActiveNav('business-english-terms');
-        }
+        } else if (quizId === 'advanced-bookkeeping-btn') {
+            setActiveNav('advanced-bookkeeping');
+        }    
+
     });
 });
 
@@ -131,6 +148,9 @@ function setActiveNav(section) {
         } else if (section === 'business-english-terms') {
             businessEnglishTermsSection.classList.add('active');
             resetBusinessEnglishTermQuiz();
+        } else if (section === 'advanced-bookkeeping') {
+            advancedBookkeepingSection.classList.add('active');
+            resetAdvancedBookkeepingQuiz();
         }
     }
 }
@@ -179,6 +199,15 @@ function resetBusinessEnglishTermQuiz() {
     businessEnglishTermUserAnswers = [];
     businessEnglishTermQuestions = shuffleArray(businessEnglishTerms).slice(0, 10);
     loadBusinessEnglishTermQuestion();
+}
+
+// 高度な簿記クイズのリセット
+function resetAdvancedBookkeepingQuiz() {
+    currentAdvancedBookkeepingIndex = 0;
+    advancedBookkeepingScore = 0;
+    advancedBookkeepingUserAnswers = [];
+    advancedBookkeepingQuestionsData = shuffleArray(advancedBookkeepingQuestions).slice(0, 10);
+    loadAdvancedBookkeepingQuestion();
 }
 
 // 日本のホテルクイズの読み込み
@@ -294,6 +323,37 @@ function updateBusinessEnglishTermScore(isCorrect) {
 businessEnglishTermsNext.addEventListener('click', () => {
     currentBusinessEnglishTermIndex++;
     loadBusinessEnglishTermQuestion();
+});
+
+// 高度な簿記クイズの読み込み
+function loadAdvancedBookkeepingQuestion() {
+    if (currentAdvancedBookkeepingIndex >= advancedBookkeepingQuestionsData.length) {
+        displayAdvancedBookkeepingResults();
+        return;
+    }
+
+    const currentQuestion = advancedBookkeepingQuestionsData[currentAdvancedBookkeepingIndex];
+    displayQuestion(
+        currentQuestion,
+        advancedBookkeepingQuiz,
+        advancedBookkeepingResult,
+        advancedBookkeepingTimer,
+        advancedBookkeepingNext,
+        updateAdvancedBookkeepingScore,
+        advancedBookkeepingUserAnswers
+    );
+    updateProgressBar(advancedBookkeepingProgress, currentAdvancedBookkeepingIndex, advancedBookkeepingQuestionsData.length);
+}
+
+function updateAdvancedBookkeepingScore(isCorrect) {
+    if (isCorrect) {
+        advancedBookkeepingScore++;
+    }
+}
+
+advancedBookkeepingNext.addEventListener('click', () => {
+    currentAdvancedBookkeepingIndex++;
+    loadAdvancedBookkeepingQuestion();
 });
 
 // 質問の表示と共通処理
